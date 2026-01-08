@@ -1,6 +1,6 @@
 #include <windows.h>
 #include "NsHiJack.h"
-#include "../hook/detours.h"
+#include "../Detours/src/detours.h"
 #include "XStoreAPIHooks.h"
 #include "../patcher.h"
 
