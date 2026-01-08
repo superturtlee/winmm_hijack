@@ -21,9 +21,33 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="APISet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIDUtils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XStoreAPIHooks.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\patcher.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="APISet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIDUtils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XStoreAPIHooks.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\patcher.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

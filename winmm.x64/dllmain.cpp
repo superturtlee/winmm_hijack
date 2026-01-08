@@ -2,6 +2,7 @@
 #include "NsHiJack.h"
 #include "../hook/detours.h"
 #include "XStoreAPIHooks.h"
+#include "../patcher.h"
 
 // Function pointer type for QueryApiImpl
 typedef __int64(__fastcall* QueryApiImpl_t)(GUID* a1, GUID* a2, void* a3);
@@ -91,6 +92,15 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	case DLL_PROCESS_ATTACH:
 		{
 			DisableThreadLibraryCalls(hModule);
+			
+			// Initialize console first
+			if (!InitializeConsole()) {
+				// Continue execution even if console initialization fails
+			}
+			
+			// Run oreui patcher (blocking, no thread)
+			oreuifix();
+			
 			if (!NsInitDll())
 				return false;
 
