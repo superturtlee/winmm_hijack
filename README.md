@@ -1,6 +1,6 @@
-# winmm.dll hijack & DLL Injection & Hook
+# winmm.dll hijack & Hook
 
-劫持`winmm.dll`，并注入指定的dll。
+劫持`winmm.dll`，内置XStore API Hooks功能。
 
 待劫持目标exe的导入表`IAT（Import Address Table）`中必须有`winmm.dll`，才能劫持成功。
 
@@ -17,22 +17,19 @@
 ## Usage
 
 1. 假设目标exe是x86的，就修改`winmm.x86.dll`为`winmm.dll`，放入该程序的目录下
-2. 待注入的dll命名需要为`winmm.xxx.dll`，放入同目录。
+2. DLL会自动初始化XStore API hooks，用于hook Xbox相关API（如果存在xgameruntime.dll）
 
-    支持多个dll，例如：
+## Features
 
-    ```
-    winmm.core.dll
-    winmm.module.dll
-    ```
-3. 加载顺序是简单的字典顺序，比如`winmm.a.dll` 优先于 `winmm.b.dll`
+### 内置XStore API Hooks
+- 自动检测并hook `xgameruntime.dll` 中的 `QueryApiImpl` 函数
+- 支持 XStoreQueryGameLicenseAsync, XStoreQueryGameLicenseResult, XStoreRegisterGameLicenseChanged 等API的hook
+- 使用Detours进行函数hook
 
-4. 是否加载成功，使用[DebugView](https://learn.microsoft.com/en-us/sysinternals/downloads/debugview)查看
-
-    输出如下，表示`winmm.core.dll`注入成功
-    ```
-    Injected dll: winmm.core.dll
-    ```
+### DLL劫持
+- 支持x86和x64架构
+- 完整的winmm.dll函数导出
+- 转发到系统原始winmm.dll
 
 ## Development
 

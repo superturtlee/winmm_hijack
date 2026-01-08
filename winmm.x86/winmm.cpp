@@ -5,7 +5,6 @@
 //
 
 #include <windows.h>
-#include "../hook/inject.h"
 #include <strsafe.h>
 
 
