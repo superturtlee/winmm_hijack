@@ -91,12 +91,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="APISet.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="GUIDUtils.cpp" />
     <ClCompile Include="winmm.cpp" />
+    <ClCompile Include="XStoreAPIHooks.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="APISet.h" />
+    <ClInclude Include="GUIDUtils.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="winmm.h" />
+    <ClInclude Include="XStoreAPIHooks.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="winmm.rc" />

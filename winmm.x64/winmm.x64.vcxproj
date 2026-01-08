@@ -99,11 +99,17 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="APISet.h" />
+    <ClInclude Include="GUIDUtils.h" />
     <ClInclude Include="NsHiJack.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="XStoreAPIHooks.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="APISet.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="GUIDUtils.cpp" />
+    <ClCompile Include="XStoreAPIHooks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="winmm.rc" />
