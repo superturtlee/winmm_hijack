@@ -9,14 +9,13 @@
 
 ## Build
 
-编译项目Release，会生两个文件，分别为
-- winmm.x86.dll
-- winmm.x64.dll
+编译项目Release，生成文件：
+- winmm.x64.dll (仅支持x64架构，GDK无x86版本)
 
 
 ## Usage
 
-1. 假设目标exe是x86的，就修改`winmm.x86.dll`为`winmm.dll`，放入该程序的目录下
+1. 修改编译生成的`winmm.x64.dll`为`winmm.dll`，放入目标程序的目录下
 2. DLL会自动初始化XStore API hooks，用于hook Xbox相关API（如果存在xgameruntime.dll）
 
 ## Features
@@ -27,7 +26,7 @@
 - 使用Detours进行函数hook
 
 ### DLL劫持
-- 支持x86和x64架构
+- 支持x64架构
 - 完整的winmm.dll函数导出
 - 转发到系统原始winmm.dll
 

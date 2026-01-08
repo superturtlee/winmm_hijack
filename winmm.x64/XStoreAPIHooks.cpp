@@ -998,9 +998,9 @@ void initXStoreAPISet() {
     // Load EXE file into memory
     if (!LoadExeFileToMemory()) {
         LogError("Failed to load EXE file, patching will not work");
-        // Don't call exit() from a DLL - just return and let the DLL continue
-        // The hook functionality will simply not activate
-        return;
+        printf("\nPress any key to exit...");
+        _getch();
+        exit(1);
     }
     
     ParseGuid("0DD112AC-7C24-448C-B92B-3960FB5BD30C", XStoreAPI.guid);
