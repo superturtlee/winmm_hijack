@@ -59,6 +59,7 @@
       <PreprocessorDefinitions>_WIN64;_DEBUG;WINMM_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -66,7 +67,7 @@
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>winmm.def</ModuleDefinitionFile>
       <AdditionalOptions>/ignore:4003 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -104,12 +105,14 @@
     <ClInclude Include="NsHiJack.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="XStoreAPIHooks.h" />
+    <ClInclude Include="..\patcher.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="APISet.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GUIDUtils.cpp" />
     <ClCompile Include="XStoreAPIHooks.cpp" />
+    <ClCompile Include="..\patcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="winmm.rc" />

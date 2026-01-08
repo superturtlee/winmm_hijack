@@ -987,11 +987,6 @@ bool LoadExeFileToMemory() {
 }
 
 void initXStoreAPISet() {
-    // Initialize console
-    if (!InitializeConsole()) {
-        // Continue execution even if console initialization fails
-    }
-    
     LogInfo("Initializing XStore API Hooks...");
     LogInfo("Waiting for %d API callers to be detected...", REQUIRED_API_COUNT);
     
