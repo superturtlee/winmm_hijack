@@ -3,6 +3,7 @@
 #include "XStoreAPIHooks.h"
 #include "GUIDUtils.h"
 #include <stdio.h>
+#include <stdarg.h>
 #include <Windows.h>
 #include <Psapi.h>
 #include <Shlwapi.h>

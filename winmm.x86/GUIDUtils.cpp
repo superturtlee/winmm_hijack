@@ -1,6 +1,7 @@
 #include <windows.h>
 #include "GUIDUtils.h"
 #include <stdio.h>
+#include <string>
 #include <string.h>
 
 // Helper function to compare GUIDs
