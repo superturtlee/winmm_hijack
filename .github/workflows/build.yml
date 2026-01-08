@@ -26,5 +26,4 @@ jobs:
         name: winmm-x64-dll
         path: |
           x64/Release/winmm.x64.dll
-          x64/Release/detours.lib
         if-no-files-found: error
