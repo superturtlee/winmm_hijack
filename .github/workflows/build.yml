@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, copilot/** ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      
+    - name: Build Solution
+      run: msbuild winmm.sln /p:Configuration=Release /p:Platform=x64 /m
+      
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: winmm-x64-dll
+        path: |
+          x64/Release/winmm.x64.dll
+          x64/Release/detours.lib
+        if-no-files-found: error
