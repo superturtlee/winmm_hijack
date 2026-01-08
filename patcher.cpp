@@ -5,8 +5,9 @@
 #include <filesystem>
 bool load_utf8_file(const std::string& filename, std::vector<char>& buffer) {
     // open the file in binary mode
-    FILE* file = std::fopen(filename.c_str(), "rb");
-    if (!file) {
+    FILE* file = nullptr;
+    errno_t err = fopen_s(&file, filename.c_str(), "rb");
+    if (err != 0 || !file) {
         return false;
     }
     // seek to the end to determine file size
@@ -25,8 +26,9 @@ bool load_utf8_file(const std::string& filename, std::vector<char>& buffer) {
 }
 bool writeback_utf8_file(const std::string& filename, const std::vector<char>& buffer) {
     // open the file in binary write mode
-    FILE* file = std::fopen(filename.c_str(), "wb");
-    if (!file) {
+    FILE* file = nullptr;
+    errno_t err = fopen_s(&file, filename.c_str(), "wb");
+    if (err != 0 || !file) {
         return false;
     }
     // write buffer content to file
