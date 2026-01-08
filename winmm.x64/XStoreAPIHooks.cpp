@@ -10,6 +10,7 @@
 #include <shellapi.h>
 #include <vector>
 #include <set>
+#include <mutex>
 #include <io.h>
 #include <fcntl.h>
 #include <conio.h>
@@ -21,12 +22,12 @@
 // Global XStore API instance
 APISet XStoreAPI;
 
-// 全局变量：存储整个 EXE 映像
+// Global variables
 std::vector<BYTE> exeFile;
 HMODULE exeBaseAddress = nullptr;
 char originalExePath[MAX_PATH];
 
-// 记录找到的函数入口位置
+// Caller information tracking
 struct CallerInfo {
     UINT64 returnAddress;
     UINT64 rva;
@@ -35,10 +36,14 @@ struct CallerInfo {
 };
 std::vector<CallerInfo> callerInfos;
 
-// 用于去重，避免重复记录同一个调用者
+// Deduplication tracking
 std::set<size_t> recordedOffsets;
 
-// 需要找到的 API 数量
+// Synchronization for exit handling
+std::mutex g_exitMutex;
+bool g_exitInProgress = false;
+
+// Required API count
 const int REQUIRED_API_COUNT = 3;
 
 typedef struct XStoreGameLicense {
@@ -738,6 +743,13 @@ bool CreateReplacementScript() {
 }
 
 void FinalizeAndExit() {
+    // Prevent multiple simultaneous calls
+    std::lock_guard<std::mutex> lock(g_exitMutex);
+    if (g_exitInProgress) {
+        return;
+    }
+    g_exitInProgress = true;
+    
     printf("\n");
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
@@ -975,20 +987,20 @@ bool LoadExeFileToMemory() {
 }
 
 void initXStoreAPISet() {
-    // 初始化控制台
+    // Initialize console
     if (!InitializeConsole()) {
-        // 如果控制台初始化失败，仍然继续执行
+        // Continue execution even if console initialization fails
     }
     
     LogInfo("Initializing XStore API Hooks...");
     LogInfo("Waiting for %d API callers to be detected...", REQUIRED_API_COUNT);
     
-    // 加载 EXE 文件到内存
+    // Load EXE file into memory
     if (!LoadExeFileToMemory()) {
         LogError("Failed to load EXE file, patching will not work");
-        printf("\nPress any key to exit...");
-        _getch();
-        exit(1);
+        // Don't call exit() from a DLL - just return and let the DLL continue
+        // The hook functionality will simply not activate
+        return;
     }
     
     ParseGuid("0DD112AC-7C24-448C-B92B-3960FB5BD30C", XStoreAPI.guid);
