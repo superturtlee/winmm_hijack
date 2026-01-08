@@ -118,8 +118,8 @@
     <ResourceCompile Include="winmm.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\hook\hook.vcxproj">
-      <Project>{a6e9f7b2-891a-49dd-b556-848477f1d3e1}</Project>
+    <ProjectReference Include="..\Detours\vc\Detours.vcxproj">
+      <Project>{37489709-8054-4903-9C49-A79846049FC9}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
