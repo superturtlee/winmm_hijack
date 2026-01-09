@@ -94,9 +94,17 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 			DisableThreadLibraryCalls(hModule);
 			
 			// Initialize console first
-			if (!InitializeConsole()) {
-				// Continue execution even if console initialization fails
-			}
+			AllocConsole();
+
+    
+
+    FILE* fpStdout = nullptr;
+    FILE* fpStderr = nullptr;
+    FILE* fpStdin = nullptr;
+
+    freopen_s(&fpStdout, "CONOUT$", "w", stdout);
+    freopen_s(&fpStderr, "CONOUT$", "w", stderr);
+    freopen_s(&fpStdin, "CONIN$", "r", stdin);
 			
 			// Run oreui patcher (blocking, no thread)
 			oreuifix();

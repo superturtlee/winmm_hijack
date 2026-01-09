@@ -13,6 +13,5 @@ __int64 __fastcall XStoreQueryGameLicenseAsync(__int64 classptr, __int64 a1, __i
 __int64 __fastcall XStoreQueryGameLicenseResult(__int64 classptr, __int64 a1, __int64 a2);
 __int64 __fastcall XStoreRegisterGameLicenseChanged(__int64 classptr, __int64 a1, __int64 a2, __int64 a3, __int64 a4, __int64 a5);
 // Initialize console
-bool InitializeConsole();
 // Initialize XStore API Set
 void initXStoreAPISet();
