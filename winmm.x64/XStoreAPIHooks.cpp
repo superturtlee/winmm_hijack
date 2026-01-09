@@ -117,6 +117,8 @@ BYTE patch_RegisterGameLicenseChanged[] = {
 
 // 将 RVA 转换为文件偏移
 size_t RvaToFileOffset(UINT64 rva) {
+    IMAGE_DOS_HEADER* dosHeader = (IMAGE_DOS_HEADER*)exeFile.data();
+    IMAGE_NT_HEADERS* ntHeaders = (IMAGE_NT_HEADERS*)(exeFile.data() + dosHeader->e_lfanew);
     IMAGE_SECTION_HEADER* sections = IMAGE_FIRST_SECTION(ntHeaders);
     
     // 遍历所有节，找到包含该 RVA 的节
