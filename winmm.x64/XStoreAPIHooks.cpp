@@ -337,9 +337,8 @@ bool ApplyPatches() {
     for (int i = 0; i < REQUIRED_API_COUNT; i++) {
         size_t patchSize = sizeof(patch[i]);
         if (patch[i] && patchSize > 0) {
-            printf("  RVA: 0x%llx, File offset: 0x%zx, Patch size: %zu bytes", 
-                    info.rva, info.fileOffset, patchSize);
-            memcpy(&exeFile[info.fileOffset], patch[i], patchSize);
+            printf("   File offset: 0x%zx, Patch size: %zu bytes", callerInfos[i], patchSize);
+            memcpy(&exeFile[callerInfos[i]], patch[i], patchSize);
         }
     }
     
