@@ -357,7 +357,7 @@ void GeneratePatchedFilePath(char* patchedPath, size_t bufferSize) {
 }
 
 // 将修补后的 EXE 写入到 .patched.exe 文件
-bool WriteExeFileToDisk() {
+void WriteExeFileToDisk() {
     char patchedPath[MAX_PATH];
     GeneratePatchedFilePath(patchedPath, MAX_PATH);
     printf("=== Writing Patched EXE ===\n");
@@ -386,7 +386,7 @@ bool WriteExeFileToDisk() {
 }
 
 // 创建自动替换脚本
-bool CreateReplacementScript() {
+void CreateReplacementScript() {
     char scriptPath[MAX_PATH];
     char patchedPath[MAX_PATH];
     char dllPath[MAX_PATH];
@@ -438,7 +438,6 @@ bool CreateReplacementScript() {
     fclose(script);
     
     printf("Replacement script created: %s", scriptPath);
-    return true;
 }
 
 void FinalizeAndExit() {
