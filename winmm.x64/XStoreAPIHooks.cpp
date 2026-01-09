@@ -443,7 +443,7 @@ bool CreateReplacementScript() {
 
 void FinalizeAndExit() {
     // Prevent multiple simultaneous calls
-    printf("Total callers recorded: %zu", callerInfos.size());
+    printf("Total callers recorded: %zu", callersFound);
     
     // 应用补丁
     ApplyPatches();
